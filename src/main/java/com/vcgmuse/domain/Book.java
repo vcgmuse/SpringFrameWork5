@@ -1,5 +1,7 @@
 package com.vcgmuse.domain;
 
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Book {
@@ -17,16 +20,26 @@ public class Book {
   private String title;
   private String isbn;
 
+  @ManyToOne
+  private Publisher publisher;
+
   @ManyToMany
   @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
-  private Set<Author> authors;
+  private Set<Author> authors = new HashSet<>();
 
   public Book(){}
 
-  public Book(String title, String isbn, Set<Author> authors){
+  public Book(String title, String isbn){
     this.title = title;
     this.isbn = isbn;
-    this. authors = authors;
+  }
+
+  public Publisher getPublisher() {
+    return publisher;
+  }
+
+  public void setPublisher(Publisher publisher) {
+    this.publisher = publisher;
   }
 
   public String getTitle() {
@@ -58,7 +71,8 @@ public class Book {
     return "Book{" +
         "id=" + id +
         ", title='" + title + '\'' +
-        ", isbn='" + isbn + '\'' +
+        ", isbn='" + isbn
+        + '\'' +
         ", authors=" + authors +
         '}';
   }
@@ -74,7 +88,7 @@ public class Book {
 
     Book book = (Book) o;
 
-    return id != null ? id.equals(book.id) : book.id == null;
+    return Objects.equals(id, book.id);
   }
 
   @Override

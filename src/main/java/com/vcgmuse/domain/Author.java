@@ -24,6 +24,7 @@ public class Author {
 
   @ManyToMany(mappedBy = "authors")
   private Set<Book> books = new HashSet<>();
+  //TODO: Can the Many To Many map an object in a database. I think so. Need answer
 
   public Author(){}
 

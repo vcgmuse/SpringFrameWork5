@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Publisher {
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
@@ -39,6 +40,14 @@ public class Publisher {
         ", state='" + state + '\'' +
         ", zip='" + zip + '\'' +
         '}';
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getName() {

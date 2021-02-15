@@ -14,9 +14,11 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Book {
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
+
   private String title;
   private String isbn;
 
@@ -32,6 +34,14 @@ public class Book {
   public Book(String title, String isbn){
     this.title = title;
     this.isbn = isbn;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public Publisher getPublisher() {
@@ -73,7 +83,6 @@ public class Book {
         ", title='" + title + '\'' +
         ", isbn='" + isbn
         + '\'' +
-        ", authors=" + authors +
         '}';
   }
 
